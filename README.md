@@ -15,6 +15,7 @@ This is a public repository for **Rachael Miki Buxton's portfolio website** as o
 - Other:
   - Icons: [FontAwesome]([https://](https://fontawesome.com/)) and [Devicon](https://devicon.dev/)
   - Title font: [Google Fonts](https://fonts.google.com/about)
+  - Domain: [Google Domains](https://domains.google/)
 
 ## Disclaimer
 This repo exists as a means of demonstration, and therefore:
