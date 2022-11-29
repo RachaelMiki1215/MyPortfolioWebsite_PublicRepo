@@ -1,0 +1,45 @@
+﻿@page "/sitemap.xml"
+@model MyPortfolioWebsite.Pages.sitemapModel
+@{
+    Layout = null;
+    Response.ContentType = "text/xml";
+}
+@using Microsoft.AspNetCore.Mvc.RazorPages
+@using Microsoft.AspNetCore.Routing
+@using MyPortfolioWebsite.Models
+@inject EndpointDataSource EndpointsDataSource
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://raebuxportfolio.azurewebsites.net/</loc>
+    </url>
+    <url>
+        <loc>https://raebuxportfolio.azurewebsites.net/Portfolio</loc>
+    </url>
+    <url>
+        <loc>https://raebuxportfolio.azurewebsites.net/KnowledgeBase</loc>
+    </url>
+    <url>
+        <loc>https://raebuxportfolio.azurewebsites.net/Resume</loc>
+    </url>
+    <url>
+        <loc>https://raebuxportfolio.azurewebsites.net/Contact</loc>
+    </url>
+    <url>
+        <loc>https://raebuxportfolio.azurewebsites.net/Other</loc>
+    </url>
+@foreach(Project project in Model.Projects)
+{
+    <url>
+        <loc>https://raebuxportfolio.azurewebsites.net/Portfolio/Details/@project.Id</loc>
+        <lastmod>@project.UpdatedDate.ToString("yyyy-MM-dd")</lastmod>
+    </url>
+}
+@foreach(Article article in Model.Articles)
+{
+    <url>
+        <loc>https://raebuxportfolio.azurewebsites.net/KnowledgeBase/Details/@article.Id</loc>
+        <lastmod>@article.UpdatedDate.ToString("yyyy-MM-dd")</lastmod>
+    </url>
+}
+</urlset>

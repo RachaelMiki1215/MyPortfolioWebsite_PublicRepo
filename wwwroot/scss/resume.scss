@@ -1,0 +1,350 @@
+﻿$background-color: #404040;
+$div-color: #303030;
+$div-color-2: #484848;
+$font-color: #f5f5f5;
+$accent-color: #f08080;
+
+main {
+    word-wrap: break-word;
+    font-size: 0.85rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 10px 0;
+}
+
+ul {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: square;
+    padding-inline-start: 30px;
+
+    li {
+        margin: 8px 0;
+        line-height: 120%;
+    }
+}
+
+#profImgNameSection {
+    text-align: center;
+    align-content: center;
+}
+#profImg {
+    width: 250px;
+    height: 250px;
+    margin: auto;
+    border-radius: 50%;
+    background-image: url("/img/resume_photo.png");
+    background-size: 150%;
+    background-position: 0 45%;
+    transform: rotate(10deg);
+}
+
+#qrCodeSection {
+    text-align: center;
+    align-content: center;
+    position: relative;
+
+    #pageQRCode {
+        margin: 35px auto 10px;
+        width: 210px;
+        height: 210px;
+        border-radius: 30px;
+    }
+
+    #qrCodeSpeechBubble {
+        transform: scale(0.3);
+        z-index: 2;
+        position: absolute;
+        top: -65px;
+        left: -225px;
+    }
+}
+
+.icon-list-socials, .icon-list-hobbies {
+    list-style-type: none;
+    padding-left: 0;
+    display: in-line;
+    word-break: break-all;
+    word-wrap: anywhere;
+
+    li {
+        padding: 5px 0;
+        line-height: 100%;
+        margin: 0;
+    }
+}
+.icon-list-socials {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 10px;
+    font-size: 24px;
+    padding: 0;
+
+    i {
+        padding: 0;
+        margin: 0;
+
+        &:hover {
+            color: $accent-color;
+            transform: scale(1.2);
+        }
+    }
+}
+.socials-url {
+    display: none;
+}
+
+.resume-project-lang {
+    background-color: $div-color-2;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-bottom: 5px;
+}
+
+.src-code-btn, .demo-btn {
+    background-color: $background-color;
+    padding: 2px 10px;
+    border-radius: 5px;
+}
+.src-code-btn::after {
+    content: 'src';
+}
+.demo-btn::after {
+    content: 'DEMO';
+}
+
+.skillDict {
+    display: list-item;
+    list-style-type: none;
+    list-style-position: outside;
+    margin: 0;
+    padding: 0;
+
+    li {
+        display: block;
+        box-sizing: border-box;
+        margin: 5px 0px;
+        padding: 5px 10px;
+        background-color: $div-color-2;
+        width: 0%;
+        position: relative;
+    }
+
+    .skillName {
+        text-align: right;
+        color: $font-color;
+    }
+
+    .skillLevel {
+        z-index: 2;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba($accent-color, 0.9);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        opacity: 0%;
+        text-transform: uppercase;
+        user-select: none;
+    }
+
+    li, .skillLevel {
+        border-radius: 10px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+    li:hover .skillLevel {
+        opacity: 100%;
+        cursor: default;
+    }
+}
+
+.gridWrapper {
+    display: grid;
+    gap: 10px;
+    width: 100%;
+    min-height: calc(100vh - 130px);
+}
+
+.section1, .section2, .section3 {
+    background-color: #202020;
+    border-radius: 20px;
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.item {
+    margin-left: 15px;
+    margin-bottom: 20px;
+}
+
+.work-company-date {
+    color: inherit;
+    font-style: italic;
+}
+
+@media screen and (min-width: 1300px) {
+    .gridWrapper {
+        grid-template-columns: 300px auto 300px;
+        grid-template-rows: auto;
+    }
+
+    .section1 {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .section2 {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .section3 {
+        grid-column: 3;
+        grid-row: 1;
+    }
+}
+
+@media screen and (max-width: 1299px) {
+    .gridWrapper {
+        grid-template-columns: 300px auto;
+        grid-template-rows: auto auto;
+    }
+
+    .section1 {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+    }
+
+    .section2 {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .section3 {
+        grid-column: 2;
+        grid-row: 2;
+    }
+}
+
+@media screen and (max-width: 799px) {
+    .gridWrapper {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto auto;
+    }
+
+    .section1 {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .section2 {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .section3 {
+        grid-column: 1;
+        grid-row: 3;
+    }
+}
+
+@media print {
+    $header-color: #506778;
+
+    h1, h2, h3, h4, h5, h6 {
+        margin: 5px 0;
+    }
+
+    strong {
+        background-color: rgba($header-color, 0.4);
+    }
+
+    ul {
+        padding-inline-start: 15px;
+    }
+
+    .icon-list-socials {
+        display: inline-block;
+        align-content: center;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0;
+        font-size: smaller;
+        padding: 0;
+
+        i {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 5px 0;
+        }
+    }
+    .socials-url {
+        display: inline;
+    }
+
+    li {
+        margin: 0;
+    }
+
+    #profImg {
+        width: 200px;
+        height: 200px;
+    }
+
+    .gridWrapper {
+        grid-template-columns: 250px auto;
+        grid-template-rows: auto auto;
+        gap: 10px;
+        row-gap: 10px;
+    }
+
+    .section1 {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .section2 {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+    }
+    .section3 {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    .section1, .section2, .section3 {
+        background-color: #D2EEF9;
+        padding: 5px;
+        border-radius: 10px;
+    }
+
+    .skillDict > li {
+        padding: 2px 5px;
+        background-color: #408EAD;
+    }
+    .skillName {
+        color: white;
+    }
+
+    .resume-project-lang {
+        background-color: #506778;
+        color: white;
+    }
+
+    .item {
+        margin-bottom: 10px;
+    }
+}

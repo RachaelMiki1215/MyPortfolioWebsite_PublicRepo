@@ -1,0 +1,87 @@
+﻿@page
+@model MyPortfolioWebsite.Pages.Portfolio.IndexModel
+@{
+    ViewData["Title"] = "Portfolio";
+    ViewData["Keywords"] = "project, projects";
+}
+@using MyPortfolioWebsite.Other;
+
+<link rel="stylesheet" href="~/css/project_list.min.css" asp-append-version="true" />
+
+<p>The following is a list of personal projects I've worked on and have been able to document so far:</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Projects[0].Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Projects[0].UpdatedDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Projects[0].ProjectStatus)</th>
+            <th>@Html.DisplayNameFor(model => model.Projects[0].Platform)</th>
+            <th>@Html.DisplayNameFor(model => model.Projects[0].Languages)</th>
+            <th>@Html.DisplayNameFor(model => model.Projects[0].Keywords)</th>
+            <th>@Html.DisplayNameFor(model => model.Projects[0].Favs)</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (MyPortfolioWebsite.Models.Project project in Model.Projects)
+{
+        <tr>
+            <td><a asp-page="./Details" asp-route-id="@project.Id">@Html.DisplayFor(modelItem => project.Name)</a></td>
+            <td>@Html.DisplayFor(modelItem => project.UpdatedDate)</td>
+            <td>@Html.StatIndicator(project.ProjectStatus)</td>
+            <td>@Html.PlatformIndicator(project.Platform)</td>
+            <td class="icon-container">
+@foreach(string lang in project.Languages)
+{
+                @Html.GetLangIcon(lang);
+}
+            </td>
+            <td>@(string.Join(" | ", project.Keywords))</td>
+            <td>@Html.DisplayFor(modelItem => project.Favs)</td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@if(Model.PageCount > 1)
+{
+<div class="pagination-nav">
+@if (Model.CurrentPage == 1)
+{
+    <a style="">
+        <i class="fa-solid fa-angles-left"></i>
+    </a>
+    <a>
+        <i class="fa-solid fa-angle-left"></i>
+    </a>
+}
+else
+{
+    <a asp-page="./Index" asp-route-currentpage="1">
+        <i class="fa-solid fa-angles-left"></i>
+    </a>
+    <a asp-page="./Index" asp-route-currentpage="@(Model.CurrentPage - 1)">
+        <i class="fa-solid fa-angle-left"></i>
+    </a>
+}
+    <div class="current-page-indicator">@Model.CurrentPage</div>
+@if (Model.CurrentPage == Model.PageCount)
+{
+    <a>
+        <i class="fa-solid fa-angle-right"></i>
+    </a>
+    <a>
+        <i class="fa-solid fa-angles-right"></i>
+    </a>
+}
+else
+{
+    <a asp-page="./Index" asp-route-currentpage="@(Model.CurrentPage + 1)">
+        <i class="fa-solid fa-angle-right"></i>
+    </a>
+    <a asp-page="./Index" asp-route-currentpage="@Model.PageCount">
+        <i class="fa-solid fa-angles-right"></i>
+    </a>       
+}
+</div>   
+}

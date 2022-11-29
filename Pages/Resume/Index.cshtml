@@ -1,0 +1,239 @@
+﻿@page
+@model MyPortfolioWebsite.Pages.Resume.IndexModel
+@section Scripts
+{
+    <script src="~/js/resume.bundle.js"></script>
+}
+@{
+    ViewData["Title"] = "Resume";
+    ViewData["Keywords"] = "resume";
+}
+
+<link rel="stylesheet" href="~/css/resume.min.css" asp-append-version="true" />
+
+<div class="gridWrapper">
+    <div class="section1">
+        <div id="profImgNameSection">
+            <div id="profImg"></div>
+            <h3>Rachael Buxton</h3>
+            <h5>Software System Engineer</h5>
+        </div>
+        <hr>
+        <div id="socialsSection">
+            <h4 class="print">Contacts & Socials</h4>
+            <ul class="icon-list-socials">
+                <li>
+                    <a href="/contact/" target="_blank" title="Message Me">
+                        <span>
+                            <i class="fas fa-envelope"></i>
+                            <span class="socials-url">
+                                rachaelbuxton1215@gmail.com
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/" target="_blank" title="Portfolio Website">
+                        <span>
+                            <i class="fas fa-globe-americas"></i>
+                            <span class="socials-url">
+                                https://raebuxportfolio.azurewebsites.net/
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/RachaelMiki1215" target="_blank" title="GitHub">
+                        <span>
+                            <i class="fab fa-github"></i>
+                            <span class="socials-url">
+                                https://github.com/RachaelMiki1215
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/in/rachael-buxton" target="_blank" title="LinkedIn">
+                        <span>
+                            <i class="fab fa-linkedin-in"></i>
+                            <span class="socials-url">
+                                https://www.linkedin.com/in/rachael-buxton
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/RachaelMiki1215" target="_blank" title = "Twitter">
+                        <span>
+                            <i class="fab fa-twitter"></i>
+                            <span class="socials-url">
+                                https://twitter.com/RachaelMiki1215
+                            </span>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <hr>
+        <div id="educationSection">
+            <h4 class="collapse-head">
+                <span class="arrow"></span>
+                Education
+            </h4>
+            <div>
+@foreach(MyPortfolioWebsite.Models.Resume.Education edu in Model.EducationList)
+{
+            <h5>@string.Format("{0} in {1}", edu.Degree, edu.Major)</h5>
+            <div class="item">@string.Format("{0}, {1}", edu.InstituteName, edu.InstituteCity)</div>
+}
+            </div>
+        </div>
+        <hr>
+        <div id="hobbiesInterestsSection">
+            <h4 class="collapse-head">
+                <span class="arrow"></span>
+                Hobbies / Interests
+            </h4>
+            <ul class="icon-list-hobbies">
+@foreach(MyPortfolioWebsite.Models.Resume.HobbyInterest hi in Model.HobbyInterestList)
+{
+                <li>
+                    @Html.Raw(hi.IconHtml)
+                    @hi.Name
+                </li>
+}
+            </ul>
+        </div>
+        <hr class="print">
+        <div id="qrCodeSection" class="print">
+            <img src="~/img/pixel-speech-bubble.png" id="qrCodeSpeechBubble" />
+            <a href="https://rachaelmiki1215.github.io/about/bio/resume" target="_blank">
+                <img id="pageQRCode" src="/img/ResumeQRCode.png" />
+            </a>
+        </div>
+    </div>
+    <div class="section2">
+        <div id="workExperienceSection">
+            <h4 class="collapse-head">
+                <span class="arrow"></span>
+                Work Experience
+            </h4>
+            <div>
+@foreach(MyPortfolioWebsite.Models.Resume.WorkExperience we in Model.WorkExperienceList)
+{
+                <h5>
+                    @we.Occupation
+                    |
+                    <span class="work-company-date">
+                        @string.Format("{0} • {1} ~ {2}", we.Company, 
+                        we.StartDate.ToString("MMMM yyyy"), 
+                        we.EndDate == null ? "Present" : ((DateTime)we.EndDate).ToString("MMMM yyyy"))
+                    </span>
+                </h5>
+                <div class="item">
+                    @Html.Raw(we.ShortDescHtml)
+                    <h6>@Html.DisplayNameFor(model => model.WorkExperienceList[0].Responsibilities)</h6>
+                    <ul>
+@foreach(string r in we.Responsibilities)
+{
+                        <li>@Html.Raw(r)</li>
+}
+                    </ul>
+                    <h6>@Html.DisplayNameFor(model => model.WorkExperienceList[0].Accomplishments)</h6>
+                    <ul>
+@foreach(string a in we.Accomplishments)
+{
+                        <li>@Html.Raw(a)</li>
+}
+                    </ul>
+                </div>
+}
+            </div>
+        </div>
+        <hr>
+        <div id="projectsSection">
+            <h4 class="collapse-head">
+                <span class="arrow"></span>
+                Projects
+            </h4>
+            <div>
+                <h5 class="collapse-head">
+                    <span class="arrow"></span>
+                    Work
+                </h5>
+                <div>
+@foreach(MyPortfolioWebsite.Models.Project p in Model.WorkProjectList)
+{
+                    <div class="item">
+                        <h6>@p.Name</h6>
+                        <div class="resume-project-lang">@string.Join(" | ", p.Languages)</div>
+                        @Html.Raw(p.ShortDescHtml)
+                        <ul>
+@foreach (string s in p.SummaryBulletPoints)
+{
+                            <li>@Html.Raw(s)</li> 
+}
+                        </ul>
+                    </div>
+}
+                </div>
+                <h5 class="collapse-head">
+                    <span class="arrow"></span>
+                    Personal
+                </h5>
+                <div>
+@foreach(MyPortfolioWebsite.Models.Project p in Model.PersonalProjectList)
+{
+                    <div class="item">
+                        <h6>
+                            @p.Name
+@if (p.SourceCodeLink != null)
+{
+                            <a href="@p.SourceCodeLink" class="src-code-btn no-print" target="_blank"></a>                           
+}
+@if (p.DemoLink != null)
+{
+                            <a href="@p.DemoLink" class="demo-btn no-print" target="_blank"></a>                           
+}
+                        </h6>
+                        <div class="resume-project-lang">@string.Join(" | ", p.Languages)</div>
+                        @Html.Raw(p.ShortDescHtml)
+                        <ul>
+@foreach (string s in p.SummaryBulletPoints)
+{
+                            <li>@Html.Raw(s)</li>
+}
+                        </ul>
+                    </div>
+}           
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section3">
+        <div id="skillSection">
+            <h4 class="collapse-head">
+                <span class="arrow"></span>
+                Skills
+            </h4>
+            <div>
+@foreach(string category in Model.SkillList.Select(s => s.Category).Distinct())
+{
+                <h5 class="collapse-head">
+                    <span class="arrow"></span>
+                    @category
+                </h5>
+                <ul class="skillDict">
+@foreach(MyPortfolioWebsite.Models.Resume.Skill s in Model.SkillList.Where(s => s.Category == category))
+{
+                    <li>
+                        <div class="skillName">@s.Name</div>
+                        <div class="skillLevel">@s.Proficiency</div>
+                    </li>            
+}
+                </ul>
+}
+            </div>
+        </div>
+    </div>
+</div>

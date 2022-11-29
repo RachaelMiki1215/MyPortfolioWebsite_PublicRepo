@@ -1,0 +1,24 @@
+﻿@page "/robots.txt"
+@*model MyPortfolioWebsite.Pages.robotsModel*@
+@{
+    Layout = null;
+    Response.ContentType = "text/plain";
+}
+@using Microsoft.AspNetCore.Hosting
+@inject IHostingEnvironment env
+User-agent: *
+Sitemap: /sitemap.xml
+@if(env.IsProduction())
+{
+    @Html.Raw(string.Join("\n",
+        new List<string>()
+        {
+            "Disallow: /Portfolio/Details/",
+            "Disallow: /KnowledgeBase/Details/",
+            "Disallow: /api/"
+        }));
+}
+else 
+{
+    @Html.Raw("Disallow: /");
+}

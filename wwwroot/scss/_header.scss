@@ -1,0 +1,186 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.title-area, navbar, .sub-navbar, #search-button, .menu-hamburger, .search-bar {
+    z-index: 10;
+    position: fixed;
+    backdrop-filter: blur(10px);
+    background-color: rgba($color: $div-color, $alpha: 0.4);
+}
+
+.title-area {
+    display: inline-block;
+    font-size: 2.5rem;
+    padding: 10px;
+    border-bottom-right-radius: $border-radius-value;
+    top: 0px;
+
+    a {
+        &, &:active, &:link, &:visited {
+            color: $font-color;
+            text-align: center;
+            font-family: 'Press Start 2P', cursive;
+            font-weight: bold;
+        }
+
+        &:hover {
+            color: $accent-color;
+            font-size: 120%;
+        }
+    }
+}
+
+navbar, .menu-hamburger {
+    top: 0px;
+    right: 10px;
+    border-radius: 0 0 $border-radius-value $border-radius-value;
+    vertical-align: middle;
+    height: 50px;
+}
+
+navbar {
+    text-transform: uppercase;
+    gap: 20px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    width: fit-content;
+
+    a {
+        &, &:active, &:link, &:visited {
+            color: $font-color;
+            text-align: center;
+            display: block;
+            justify-content: center;
+            margin: auto;
+        }
+
+        &:hover {
+            color: $accent-color;
+            transform: scale(1.2);
+        }
+    }
+
+    .selected {
+        // TODO: Figure out how to remove this !important statement
+        color: $accent-color !important;
+    }
+}
+
+.menu-hamburger {
+    width: 50px;
+    cursor: pointer;
+
+    &:hover > i {
+        color: $accent-color;
+        transform: scale(1.4);
+    }
+
+    &:hover + navbar {
+        display: flex;
+        top: 40px;
+        right: 10px;
+    }
+}
+
+.sub-navbar {
+    display: flex;
+    flex-direction: row;
+    right: -200px;
+    top: 60px;
+    width: 200px;
+    padding: 10px 20px 10px 10px;
+    border-radius: $border-radius-value 0 0 $border-radius-value;
+
+    .arrow {
+        width: 0;
+        height: 0;
+        border-right: 10px solid white;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        align-self: center;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-height: calc(100vh - 140px);
+        overflow-y: auto;
+        width: 100%;
+
+        a {
+            &, &:active, &:link, &:visited {
+                color: $font-color;
+                text-align: right;
+            }
+
+            &:hover {
+                color: $accent-color;
+                font-size: 120%;
+            }
+        }
+    }
+
+    &:hover {
+        right: 0;
+    }
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px 20px;
+    border-top-left-radius: $border-radius-value;
+    border-bottom-left-radius: $border-radius-value;
+    top: 60px;
+    right: -250px;
+
+    &:hover, &:focus-within {
+        right: 0;
+    }
+
+    select, input {
+        width: 100px;
+    }
+}
+
+@media screen and (min-width: 940px) {
+    navbar {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .menu-hamburger {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 939.9px) {
+    navbar {
+        display: none;
+        flex-direction: column;
+        height: fit-content;
+        border-radius: $border-radius-value;
+
+        &:hover {
+            display: flex;
+            top: 40px;
+        }
+    }
+
+    .menu-hamburger {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .title-area {
+        a {
+            font-size: 8vw;
+
+            &:hover {
+                font-size: 9vw;
+            }
+        }
+    }
+}

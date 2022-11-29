@@ -1,0 +1,33 @@
+﻿footer {
+    z-index: 10;
+    position: fixed;
+    bottom: -25px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: fit-content;
+    height: 75px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: $border-radius-value $border-radius-value 0 0;
+    background-color: rgba($color: $div-color, $alpha: 0.4);
+    backdrop-filter: blur(10px);
+}
+footer:hover {
+    bottom: 0;
+}
+
+.footer-content {
+    display: flex;
+    margin: 10px;
+    gap: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.footer-caption {
+    text-align: center;
+    font-size: x-small;
+    margin-bottom: 5px;
+}

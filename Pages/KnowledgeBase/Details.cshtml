@@ -1,0 +1,41 @@
+﻿@page "{id:long?}"
+@model MyPortfolioWebsite.Pages.KnowledgeBase.DetailsModel
+@{
+    ViewData["Title"] = Model.Article.Title;
+    ViewData["Keywords"] = "article, " + string.Join(", ", Model.Article.Keywords);
+}
+@section Scripts {
+    <script>
+        $('.fav-indicator').click(function() {
+            $.ajax({
+                type: "POST",
+                url: "@string.Format("/KnowledgeBase/Details/{0}?handler=AddFav", Model.Article.Id)",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: function() {
+                    $('.fav-indicator-number').html(parseInt($('.fav-indicator-number').html()) + 1);
+                }
+            })
+        });
+    </script>
+}
+
+@Html.AntiForgeryToken()
+
+<h1>
+    @Model.Article.Title
+    <span class="fav-indicator">
+        <i class="fa-solid fa-heart"></i>
+        <span class="fav-indicator-number">@Model.Article.Favs</span>
+    </span>
+</h1>
+
+<div class="update-date-indicator">@Model.Article.UpdatedDate.ToString("yyyy/MM/dd")</div>
+@if (Model.Article.Keywords != null && Model.Article.Keywords.Length > 0)
+{
+    <div class="keyword-container">@string.Join(" | ", Model.Article.Keywords)</div>   
+}
+
+<div>@Html.Raw(Model.Article.ContentHtml)</div>

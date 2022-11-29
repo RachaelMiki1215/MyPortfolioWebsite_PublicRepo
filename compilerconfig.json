@@ -1,0 +1,18 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/site.css",
+    "inputFile": "wwwroot/scss/site.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/resume.css",
+    "inputFile": "wwwroot/scss/resume.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/project_list.css",
+    "inputFile": "wwwroot/scss/project_list.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/article_list.css",
+    "inputFile": "wwwroot/scss/article_list.scss"
+  }
+]

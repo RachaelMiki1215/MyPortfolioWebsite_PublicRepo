@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "three": "0.142.0"
+  },
+  "scripts": {
+    "build": "webpack --mode=development",
+    "build:prod": "webpack --mode=production"
+  },
+  "devDependencies": {
+    "@types/dat.gui": "^0.7.7",
+    "@types/jquery": "3.5.14",
+    "@types/three": "0.141.0",
+    "dat.gui": "^0.7.9",
+    "ts-loader": "^9.2.5",
+    "typescript": "^4.4.3",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0"
+  }
+}

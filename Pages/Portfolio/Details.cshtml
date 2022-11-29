@@ -1,0 +1,99 @@
+﻿@page "{id:long?}"
+@model MyPortfolioWebsite.Pages.Portfolio.DetailsModel
+@{
+    ViewData["Title"] = Model.Project.Name;
+    ViewData["Keywords"] = "project, " + string.Join(", ", Model.Project.Keywords)
+        + ", " + string.Join(", ", Model.Project.Languages);
+}
+@section Scripts {
+    <script>
+        $('.fav-indicator').click(function() {
+            $.ajax({
+                type: "POST",
+                url: "@string.Format("/Portfolio/Details/{0}?handler=AddFav", Model.Project.Id)",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: function() {
+                    $('.fav-indicator-number').html(parseInt($('.fav-indicator-number').html()) + 1);
+                }
+            })
+        });
+    </script>
+}
+@using MyPortfolioWebsite.Other;
+
+@Html.AntiForgeryToken()
+
+<h1>
+    @Html.DisplayFor(model => model.Project.Name)
+    @Html.PlatformIndicator(Model.Project.Platform)
+    @Html.StatIndicator(Model.Project.ProjectStatus)
+    <span class="fav-indicator">
+        <i class="fa-solid fa-heart"></i>
+        <span class="fav-indicator-number">@Model.Project.Favs</span>
+    </span>
+</h1>
+
+<div class="update-date-indicator">@Model.Project.UpdatedDate.ToString("yyyy/MM/dd")</div>
+
+<dl>
+    <dt>@Html.DisplayNameFor(model => model.Project.Languages)</dt>
+    <dd class="icon-container">
+@foreach(string lang in Model.Project.Languages)
+{
+        @Html.GetLangIcon(lang);
+}
+    </dd>
+    <dt>@Html.DisplayNameFor(model => model.Project.Keywords)</dt>
+    <dd>@(string.Join(" | ", Model.Project.Keywords))</dd>
+@if (Model.Project.SourceCodeLink != null)
+{
+    <dt>@Html.DisplayNameFor(model => model.Project.SourceCodeLink)</dt>
+    <dd>
+        <a href="@Model.Project.SourceCodeLink">Link</a>
+    </dd>
+}
+@if (Model.Project.DistributionLink != null)
+{
+    <dt>@Html.DisplayNameFor(model => model.Project.DistributionLink)</dt>
+    <dd>
+        <a href="@Model.Project.DistributionLink">Link</a>
+    </dd>
+}
+@if (Model.Project.DemoLink != null)
+{
+    <dt>@Html.DisplayNameFor(model => model.Project.DemoLink)</dt>
+    <dd>
+        <a href="@Model.Project.DemoLink">Link</a>
+    </dd>
+}
+</dl>
+
+<h2>@Html.DisplayNameFor(model => model.Project.ShortDescHtml)</h2>
+<div>@Html.Raw(Model.Project.ShortDescHtml)</div>
+
+<h2>@Html.DisplayNameFor(model => model.Project.DetailedDescHtml)</h2>
+<div>@Html.Raw(Model.Project.DetailedDescHtml)</div>
+
+<h2>@Html.DisplayNameFor(model => model.Project.CurrentFeatures)</h2>
+<div>Here are the main features currently available for this project item:</div>
+<ul>
+@foreach (string item in Model.Project.CurrentFeatures) 
+{
+    <li>@Html.Raw(item)</li>
+}
+</ul>
+
+@if (Model.Project.AnticipatedFeatures != null && Model.Project.AnticipatedFeatures.Length > 0)
+{
+<h2>@Html.DisplayNameFor(model => model.Project.AnticipatedFeatures)</h2>
+<div>Here are some features I'd like to incorporate in the future:</div>
+<ul>
+@foreach (string item in Model.Project.AnticipatedFeatures) 
+{
+    <li>@Html.Raw(item)</li>
+}
+</ul>
+}

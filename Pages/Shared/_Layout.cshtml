@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Rachael Miki Buxton" />
+    <meta name="keywords" 
+        content="@("personal, portfolio" + 
+        (ViewData.ContainsKey("Keywords") ? ", " + ViewData["Keywords"] : ""))"/>
+    <meta name="description" content="Rachael Miki Buxton's personal website" />
+    <title>@ViewData["Title"] - @(MyPortfolioWebsite.Other.Global.WebsiteName)</title>
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <link rel="shortcut icon" href="~/favicon.ico" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <script src="https://kit.fontawesome.com/ed0b8ed380.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="title-area">
+        <a href="/">@(MyPortfolioWebsite.Other.Global.WebsiteName)</a>
+    </div>
+
+    <header>
+        <div class="menu-hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <navbar>
+            @using MyPortfolioWebsite.Other
+            @Html.MenuItem("Portfolio", "Portfolio", "/Portfolio")
+            @Html.MenuItem("Knowledge Base", "KnowledgeBase", "/KnowledgeBase")
+            @Html.MenuItem("Resume", "Resume", "/Resume")
+            @Html.MenuItem("Contact", "Contact", "/Contact")
+            @Html.MenuItem("Other", "Other", "/Other")
+        </navbar>
+
+        @*<div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <select name="domain" class="search-bar-domain-dropdown">
+                <option value="all" selected>All</option>
+                <option value="portfolio">Portfolio</option>
+                <option value="knowledgebase">Knowledge Baser</option>
+            </select>
+            <input type="text" class="search-bar-textbox" />
+        </div>*@
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <a asp-page="/Contact/Index" class="socialsLink" title="Message Me">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://github.com/RachaelMiki1215" target="_blank" class="socialsLink" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://codepen.io/rachaelmiki1215" target="_blank" class="socialsLink" title="CodePen">
+                <i class="fa fa-brands fa-codepen"></i>
+            </a>
+            <a href="https://twitter.com/RachaelMiki1215" target="_blank" class="socialsLink" title="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/rachael-buxton" target="_blank" class="socialsLink" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </div>
+        <div class="footer-caption">
+            &copy; 2022 - @(MyPortfolioWebsite.Other.Global.WebsiteName) - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!--<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
+    <script src="~/js/all.bundle.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
